@@ -28,3 +28,14 @@ app.use("/recommendation", require("./routes/recommendation"));
 
 // 서버 실행
 app.listen(PORT, () => console.log(`🚀 서버 실행 중: http://localhost:${PORT}`));
+
+const { spawn } = require('child_process');
+
+const botProcess = spawn('node', ['./bot/app.js'], {
+    stdio: 'inherit',
+    shell: true
+});
+
+botProcess.on('close', (code) => {
+    console.log(`봇 프로세스 종료됨. 코드: ${code}`);
+});
